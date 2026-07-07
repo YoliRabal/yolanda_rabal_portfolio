@@ -11,7 +11,7 @@ class PortfolioApp extends StatelessWidget {
       title: 'Yolanda Rabal | Portfolio',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.darkTheme,
-      home: const HomePage(),
+      home: const HomePage(),//
     );
   }
 }
