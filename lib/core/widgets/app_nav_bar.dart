@@ -46,7 +46,6 @@ class AppNavBar extends StatelessWidget {
             fit: BoxFit.contain,
           ),
           SizedBox(width: _logoNameSpacing(width)),
-
           SizedBox(
             width: _nameBoxWidth(width),
             child: Text(
@@ -59,10 +58,8 @@ class AppNavBar extends StatelessWidget {
               overflow: TextOverflow.ellipsis,
             ),
           ),
-
           const SizedBox(width: 18),
           const Spacer(),
-
           if (isVerySmall)
             Row(
               mainAxisSize: MainAxisSize.min,
@@ -83,47 +80,64 @@ class AppNavBar extends StatelessWidget {
           else
             Flexible(
               flex: 3,
-              child: FittedBox(
-                fit: BoxFit.scaleDown,
-                alignment: Alignment.centerRight,
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    _NavItem(
-                      text: 'Proyectos',
-                      isActive: true,
-                      fontSize: _navFontSize(width),
-                      spacing: _navSpacing(width),
+              child: ValueListenableBuilder<String?>(
+                valueListenable: AppScrollController.activeSection,
+                builder: (context, activeSection, _) {
+                  return FittedBox(
+                    fit: BoxFit.scaleDown,
+                    alignment: Alignment.centerRight,
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        _NavItem(
+                          text: 'Proyectos',
+                          section: AppScrollController.projectsSection,
+                          isActive: activeSection ==
+                              AppScrollController.projectsSection,
+                          fontSize: _navFontSize(width),
+                          spacing: _navSpacing(width),
+                        ),
+                        _NavItem(
+                          text: 'Educación',
+                          section: AppScrollController.educationSection,
+                          isActive: activeSection ==
+                              AppScrollController.educationSection,
+                          fontSize: _navFontSize(width),
+                          spacing: _navSpacing(width),
+                        ),
+                        _NavItem(
+                          text: 'Certificados',
+                          section: AppScrollController.certificatesSection,
+                          isActive: activeSection ==
+                              AppScrollController.certificatesSection,
+                          fontSize: _navFontSize(width),
+                          spacing: _navSpacing(width),
+                        ),
+
+                        _NavItem(
+                          text: 'Contacto',
+                          section: AppScrollController.contactSection,
+                          isActive: activeSection ==
+                              AppScrollController.contactSection,
+                          fontSize: _navFontSize(width),
+                          spacing: _navSpacing(width),
+                        ),
+                        SizedBox(width: _socialSpacing(width)),
+                        _SocialIcon(
+                          icon: FontAwesomeIcons.github,
+                          onTap: () => LaunchUrlHelper.open(AppLinks.github),
+                          compact: isIntermediate,
+                        ),
+                        SizedBox(width: isIntermediate ? 10 : 14),
+                        _SocialIcon(
+                          icon: FontAwesomeIcons.linkedin,
+                          onTap: () => LaunchUrlHelper.open(AppLinks.linkedIn),
+                          compact: isIntermediate,
+                        ),
+                      ],
                     ),
-                    _NavItem(
-                      text: 'Certificados',
-                      fontSize: _navFontSize(width),
-                      spacing: _navSpacing(width),
-                    ),
-                    _NavItem(
-                      text: 'Educación',
-                      fontSize: _navFontSize(width),
-                      spacing: _navSpacing(width),
-                    ),
-                    _NavItem(
-                      text: 'Contacto',
-                      fontSize: _navFontSize(width),
-                      spacing: _navSpacing(width),
-                    ),
-                    SizedBox(width: _socialSpacing(width)),
-                    _SocialIcon(
-                      icon: FontAwesomeIcons.github,
-                      onTap: () => LaunchUrlHelper.open(AppLinks.github),
-                      compact: isIntermediate,
-                    ),
-                    SizedBox(width: isIntermediate ? 10 : 14),
-                    _SocialIcon(
-                      icon: FontAwesomeIcons.linkedin,
-                      onTap: () => LaunchUrlHelper.open(AppLinks.linkedIn),
-                      compact: isIntermediate,
-                    ),
-                  ],
-                ),
+                  );
+                },
               ),
             ),
         ],
@@ -203,44 +217,21 @@ class AppNavBar extends StatelessWidget {
 class _NavItem extends StatelessWidget {
   const _NavItem({
     required this.text,
+    required this.section,
     required this.fontSize,
     required this.spacing,
-    this.isActive = false,
+    required this.isActive,
   });
 
   final String text;
+  final String section;
   final double fontSize;
   final double spacing;
   final bool isActive;
 
   @override
   Widget build(BuildContext context) {
-    VoidCallback onTap;
-
-    switch (text) {
-      case 'Proyectos':
-        onTap = () => AppScrollController.scrollTo(
-          AppScrollController.projectsKey,
-        );
-        break;
-      case 'Certificados':
-        onTap = () => AppScrollController.scrollTo(
-          AppScrollController.certificatesKey,
-        );
-        break;
-      case 'Educación':
-        onTap = () => AppScrollController.scrollTo(
-          AppScrollController.educationKey,
-        );
-        break;
-      case 'Contacto':
-        onTap = () => AppScrollController.scrollTo(
-          AppScrollController.contactKey,
-        );
-        break;
-      default:
-        onTap = () {};
-    }
+    final onTap = _getOnTap();
 
     return Padding(
       padding: EdgeInsets.only(left: spacing),
@@ -256,12 +247,15 @@ class _NavItem extends StatelessWidget {
                 text,
                 style: AppTextStyles.navItem.copyWith(
                   fontSize: fontSize,
+                  color: isActive
+                      ? AppColors.textPrimary
+                      : AppColors.textPrimary.withValues(alpha: 0.92),
                 ),
                 maxLines: 1,
               ),
               const SizedBox(height: 7),
               AnimatedContainer(
-                duration: const Duration(milliseconds: 200),
+                duration: const Duration(milliseconds: 220),
                 width: isActive ? 78 : 0,
                 height: 3,
                 decoration: BoxDecoration(
@@ -274,6 +268,37 @@ class _NavItem extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  VoidCallback _getOnTap() {
+    switch (section) {
+      case AppScrollController.projectsSection:
+        return () => AppScrollController.scrollTo(
+          AppScrollController.projectsKey,
+          section: AppScrollController.projectsSection,
+        );
+
+      case AppScrollController.educationSection:
+        return () => AppScrollController.scrollTo(
+          AppScrollController.educationKey,
+          section: AppScrollController.educationSection,
+        );
+
+      case AppScrollController.certificatesSection:
+        return () => AppScrollController.scrollTo(
+          AppScrollController.certificatesKey,
+          section: AppScrollController.certificatesSection,
+        );
+
+      case AppScrollController.contactSection:
+        return () => AppScrollController.scrollTo(
+          AppScrollController.contactKey,
+          section: AppScrollController.contactSection,
+        );
+
+      default:
+        return () {};
+    }
   }
 }
 
