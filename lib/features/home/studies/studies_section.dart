@@ -20,7 +20,7 @@ class StudiesSection extends StatelessWidget {
       color: AppColors.background,
       padding: EdgeInsets.only(
         top: isMobile ? 54 : 74,
-        bottom: isMobile ? 64 : 92,
+        bottom: isMobile ? 30 : 50,
       ),
       child: ResponsiveContainer(
         maxWidth: 1500,

@@ -20,7 +20,7 @@ class CertificatesSection extends StatelessWidget {
       width: double.infinity,
       color: AppColors.background,
       padding: EdgeInsets.only(
-        top: isMobile ? 48 : 68,
+        top: isMobile ? 25 : 30,
         bottom: isMobile ? 64 : 90,
       ),
       child: ResponsiveContainer(

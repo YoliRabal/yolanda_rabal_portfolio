@@ -142,59 +142,59 @@ class _MobileTimelineItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return IntrinsicHeight(
-      child: Row(
+    return Padding(
+      padding: EdgeInsets.only(
+        bottom: isLast ? 0 : 52,
+      ),
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(
-            width: 34,
-            child: Column(
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              const SizedBox(
+                width: 34,
+                child: Center(
+                  child: TimelineDot(),
+                ),
+              ),
+              const SizedBox(width: 14),
+              Text(
+                period,
+                style: AppTextStyles.heroRole.copyWith(
+                  fontSize: 12,
+                  letterSpacing: 1.4,
+                  color: AppColors.magenta,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 16),
+          IntrinsicHeight(
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                const TimelineDot(),
-                Expanded(
-                  child: Container(
-                    width: 1,
-                    margin: const EdgeInsets.symmetric(vertical: 8),
-                    color: isLast
-                        ? Colors.transparent
-                        : AppColors.cyan.withValues(alpha: 0.24),
+                SizedBox(
+                  width: 34,
+                  child: Center(
+                    child: Container(
+                      width: 1,
+                      color: isLast
+                          ? Colors.transparent
+                          : AppColors.cyan.withValues(alpha: 0.24),
+                    ),
                   ),
                 ),
-              ],
-            ),
-          ),
-          const SizedBox(width: 14),
-          Expanded(
-            child: Padding(
-              padding: EdgeInsets.only(
-                bottom: isLast ? 0 : 52,
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(
-                      top: 2,
-                      left: 2,
-                    ),
-                    child: Text(
-                      period,
-                      style: AppTextStyles.heroRole.copyWith(
-                        fontSize: 12,
-                        letterSpacing: 1.4,
-                        color: AppColors.magenta,
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 18),
-                  _TimelineContent(
+                const SizedBox(width: 14),
+                Expanded(
+                  child: _TimelineContent(
                     title: title,
                     institution: institution,
                     description: description,
                     chips: chips,
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         ],
