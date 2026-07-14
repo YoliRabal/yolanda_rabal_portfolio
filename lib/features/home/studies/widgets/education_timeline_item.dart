@@ -167,20 +167,26 @@ class _MobileTimelineItem extends StatelessWidget {
           Expanded(
             child: Padding(
               padding: EdgeInsets.only(
-                bottom: isLast ? 0 : 46,
+                bottom: isLast ? 0 : 52,
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    period,
-                    style: AppTextStyles.heroRole.copyWith(
-                      fontSize: 12,
-                      letterSpacing: 1.4,
-                      color: AppColors.magenta,
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      top: 2,
+                      left: 2,
+                    ),
+                    child: Text(
+                      period,
+                      style: AppTextStyles.heroRole.copyWith(
+                        fontSize: 12,
+                        letterSpacing: 1.4,
+                        color: AppColors.magenta,
+                      ),
                     ),
                   ),
-                  const SizedBox(height: 10),
+                  const SizedBox(height: 18),
                   _TimelineContent(
                     title: title,
                     institution: institution,
@@ -243,15 +249,15 @@ class _TimelineContent extends StatelessWidget {
           Text(
             title,
             style: AppTextStyles.cardTitle.copyWith(
-              fontSize: isMobile ? 20 : 24,
-              height: 1.2,
+              fontSize: isMobile ? 24 : 24,
+              height: 1.18,
             ),
           ),
-          const SizedBox(height: 8),
+          const SizedBox(height: 10),
           Text(
             institution,
             style: AppTextStyles.heroRole.copyWith(
-              fontSize: isMobile ? 12.5 : 13.5,
+              fontSize: isMobile ? 13 : 13.5,
               letterSpacing: 1.4,
               color: AppColors.cyan,
             ),
@@ -260,7 +266,7 @@ class _TimelineContent extends StatelessWidget {
           Text(
             description,
             style: AppTextStyles.body.copyWith(
-              fontSize: isMobile ? 13.5 : 14.5,
+              fontSize: isMobile ? 15 : 14.5,
               height: 1.58,
               color: AppColors.textSecondary,
             ),
