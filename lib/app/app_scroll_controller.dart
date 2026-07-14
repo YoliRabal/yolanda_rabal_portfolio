@@ -41,20 +41,22 @@ class AppScrollController {
   }
 
   static void updateActiveSectionFromScroll() {
-    final educationTop = _sectionTop(educationKey);
+    const activationOffset = 140;
 
-    if (educationTop == null) {
-      activeSection.value = null;
+    final educationTop = _sectionTop(educationKey);
+    final certificatesTop = _sectionTop(certificatesKey);
+
+    if (certificatesTop != null && certificatesTop <= activationOffset) {
+      activeSection.value = certificatesSection;
       return;
     }
 
-    const activationOffset = 130;
-
-    if (educationTop <= activationOffset) {
+    if (educationTop != null && educationTop <= activationOffset) {
       activeSection.value = educationSection;
-    } else {
-      activeSection.value = null;
+      return;
     }
+
+    activeSection.value = null;
   }
 
   static double? _sectionTop(GlobalKey key) {

@@ -5,6 +5,7 @@ import '../../core/theme/app_colors.dart';
 import '../../core/widgets/app_nav_bar_delegate.dart';
 import 'presentation/presentation_section.dart';
 import 'studies/studies_section.dart';
+import 'certificates/certificates_section.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -47,6 +48,9 @@ class _HomePageState extends State<HomePage> {
           ),
           const SliverToBoxAdapter(
             child: StudiesSection(),
+          ),
+          const SliverToBoxAdapter(
+            child: CertificatesSection(),
           ),
         ],
       ),
