@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yolanda_rabal_portfolio/features/home/projects/projects_section.dart';
 
 import '../../app/app_scroll_controller.dart';
 import '../../core/theme/app_colors.dart';
@@ -45,6 +46,9 @@ class _HomePageState extends State<HomePage> {
           ),
           const SliverToBoxAdapter(
             child: PresentationSection(),
+          ),
+          const SliverToBoxAdapter(
+            child: ProjectsSection(),
           ),
           const SliverToBoxAdapter(
             child: StudiesSection(),
