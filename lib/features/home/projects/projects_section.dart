@@ -20,8 +20,8 @@ class ProjectsSection extends StatelessWidget {
       width: double.infinity,
       color: AppColors.background,
       padding: EdgeInsets.only(
-        top: isMobile ? 56 : 74,
-        bottom: isMobile ? 64 : 92,
+        top: isMobile ? 40 : 52,
+        bottom: isMobile ? 32 : 42,
       ),
       child: ResponsiveContainer(
         maxWidth: 1500,
@@ -29,7 +29,7 @@ class ProjectsSection extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const _ProjectsHeader(),
-            SizedBox(height: isMobile ? 38 : 54),
+            SizedBox(height: isMobile ? 30 : 40),
             ...List.generate(
               _projects.length,
                   (index) {
@@ -40,8 +40,8 @@ class ProjectsSection extends StatelessWidget {
                     bottom: index == _projects.length - 1
                         ? 0
                         : isMobile
-                        ? 34
-                        : 46,
+                        ? 28
+                        : 36,
                   ),
                   child: ProjectCard(
                     title: project.title,

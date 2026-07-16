@@ -20,8 +20,8 @@ class CertificatesSection extends StatelessWidget {
       width: double.infinity,
       color: AppColors.background,
       padding: EdgeInsets.only(
-        top: isMobile ? 25 : 30,
-        bottom: isMobile ? 64 : 90,
+        top: isMobile ? 40 : 52,
+        bottom: isMobile ? 32 : 42,
       ),
       child: ResponsiveContainer(
         maxWidth: 1500,
@@ -29,7 +29,7 @@ class CertificatesSection extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const _CertificatesHeader(),
-            SizedBox(height: isMobile ? 34 : 46),
+            SizedBox(height: isMobile ? 30 : 40),
             const _CertificatesGrid(),
           ],
         ),

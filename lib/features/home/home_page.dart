@@ -4,6 +4,7 @@ import 'package:yolanda_rabal_portfolio/features/home/projects/projects_section.
 import '../../app/app_scroll_controller.dart';
 import '../../core/theme/app_colors.dart';
 import '../../core/widgets/app_nav_bar_delegate.dart';
+import 'contact/contact_section.dart';
 import 'presentation/presentation_section.dart';
 import 'studies/studies_section.dart';
 import 'certificates/certificates_section.dart';
@@ -55,6 +56,9 @@ class _HomePageState extends State<HomePage> {
           ),
           const SliverToBoxAdapter(
             child: CertificatesSection(),
+          ),
+          const SliverToBoxAdapter(
+            child: ContactSection(),
           ),
         ],
       ),

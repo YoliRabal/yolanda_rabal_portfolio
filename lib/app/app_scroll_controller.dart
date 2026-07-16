@@ -12,8 +12,8 @@ class AppScrollController {
   static final GlobalKey contactKey = GlobalKey();
 
   static const String projectsSection = 'projects';
-  static const String educationSection = 'education';
   static const String certificatesSection = 'certificates';
+  static const String educationSection = 'education';
   static const String contactSection = 'contact';
 
   static final ValueNotifier<String?> activeSection = ValueNotifier<String?>(

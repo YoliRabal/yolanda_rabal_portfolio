@@ -19,8 +19,8 @@ class StudiesSection extends StatelessWidget {
       width: double.infinity,
       color: AppColors.background,
       padding: EdgeInsets.only(
-        top: isMobile ? 54 : 74,
-        bottom: isMobile ? 30 : 50,
+        top: isMobile ? 40 : 52,
+        bottom: isMobile ? 32 : 42,
       ),
       child: ResponsiveContainer(
         maxWidth: 1500,
@@ -28,7 +28,7 @@ class StudiesSection extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const _StudiesHeader(),
-            SizedBox(height: isMobile ? 42 : 58),
+            SizedBox(height: isMobile ? 30 : 40),
             const EducationTimeline(),
           ],
         ),
