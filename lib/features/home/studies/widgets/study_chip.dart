@@ -30,6 +30,7 @@ class StudyChip extends StatelessWidget {
         child: Text(
           label,
           maxLines: 1,
+          overflow: TextOverflow.ellipsis,
           style: AppTextStyles.bodySmall.copyWith(
             fontSize: 12.5,
             height: 1,

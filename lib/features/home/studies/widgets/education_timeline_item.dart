@@ -110,12 +110,10 @@ class _DesktopTimelineItem extends StatelessWidget {
                 bottom: isLast ? 0 : 58,
               ),
               child: _TimelineContent(
-                period: period,
                 title: title,
                 institution: institution,
                 description: description,
                 chips: chips,
-                showPeriodInsideCard: false,
               ),
             ),
           ),
@@ -144,44 +142,65 @@ class _MobileTimelineItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return IntrinsicHeight(
-      child: Padding(
-        padding: EdgeInsets.only(
-          bottom: isLast ? 0 : 46,
-        ),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(
-              width: 30,
-              child: Column(
+    return Padding(
+      padding: EdgeInsets.only(
+        bottom: isLast ? 0 : 52,
+      ),
+      child: Stack(
+        children: [
+          Positioned(
+            left: 14,
+            top: 20,
+            bottom: 0,
+            child: Container(
+              width: 1,
+              color: isLast
+                  ? Colors.transparent
+                  : AppColors.cyan.withValues(alpha: 0.24),
+            ),
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  const TimelineDot(),
-                  Expanded(
-                    child: Container(
-                      width: 1,
-                      margin: const EdgeInsets.symmetric(vertical: 8),
-                      color: isLast
-                          ? Colors.transparent
-                          : AppColors.cyan.withValues(alpha: 0.24),
+                  const SizedBox(
+                    width: 30,
+                    child: Center(
+                      child: TimelineDot(),
+                    ),
+                  ),
+                  const SizedBox(width: 14),
+                  Text(
+                    period,
+                    style: AppTextStyles.heroRole.copyWith(
+                      fontSize: 12,
+                      letterSpacing: 1.4,
+                      color: AppColors.magenta,
                     ),
                   ),
                 ],
               ),
-            ),
-            const SizedBox(width: 14),
-            Expanded(
-              child: _TimelineContent(
-                period: period,
-                title: title,
-                institution: institution,
-                description: description,
-                chips: chips,
-                showPeriodInsideCard: true,
+              const SizedBox(height: 16),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(width: 30),
+                  const SizedBox(width: 14),
+                  Expanded(
+                    child: _TimelineContent(
+                      title: title,
+                      institution: institution,
+                      description: description,
+                      chips: chips,
+                    ),
+                  ),
+                ],
               ),
-            ),
-          ],
-        ),
+            ],
+          ),
+        ],
       ),
     );
   }
@@ -189,20 +208,16 @@ class _MobileTimelineItem extends StatelessWidget {
 
 class _TimelineContent extends StatelessWidget {
   const _TimelineContent({
-    required this.period,
     required this.title,
     required this.institution,
     required this.description,
     required this.chips,
-    required this.showPeriodInsideCard,
   });
 
-  final String period;
   final String title;
   final String institution;
   final String description;
   final List<String> chips;
-  final bool showPeriodInsideCard;
 
   @override
   Widget build(BuildContext context) {
@@ -210,7 +225,7 @@ class _TimelineContent extends StatelessWidget {
 
     return Container(
       width: double.infinity,
-      padding: EdgeInsets.all(isMobile ? 20 : 24),
+      padding: EdgeInsets.all(isMobile ? 18 : 24),
       decoration: BoxDecoration(
         color: AppColors.background.withValues(alpha: 0.68),
         borderRadius: BorderRadius.circular(20),
@@ -233,22 +248,12 @@ class _TimelineContent extends StatelessWidget {
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
         children: [
-          if (showPeriodInsideCard) ...[
-            Text(
-              period,
-              style: AppTextStyles.heroRole.copyWith(
-                fontSize: 12,
-                letterSpacing: 1.4,
-                color: AppColors.magenta,
-              ),
-            ),
-            const SizedBox(height: 14),
-          ],
           Text(
             title,
             style: AppTextStyles.cardTitle.copyWith(
-              fontSize: isMobile ? 23 : 24,
+              fontSize: isMobile ? 21.5 : 24,
               height: 1.18,
             ),
           ),
@@ -256,21 +261,21 @@ class _TimelineContent extends StatelessWidget {
           Text(
             institution,
             style: AppTextStyles.heroRole.copyWith(
-              fontSize: isMobile ? 12.5 : 13.5,
-              letterSpacing: 1.35,
+              fontSize: isMobile ? 12.2 : 13.5,
+              letterSpacing: isMobile ? 1.15 : 1.35,
               color: AppColors.cyan,
             ),
           ),
-          const SizedBox(height: 18),
+          const SizedBox(height: 16),
           Text(
             description,
             style: AppTextStyles.body.copyWith(
-              fontSize: isMobile ? 14.5 : 14.5,
-              height: 1.56,
+              fontSize: isMobile ? 14 : 14.5,
+              height: 1.52,
               color: AppColors.textSecondary,
             ),
           ),
-          const SizedBox(height: 20),
+          const SizedBox(height: 18),
           Wrap(
             spacing: 8,
             runSpacing: 8,
